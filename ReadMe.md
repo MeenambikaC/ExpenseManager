@@ -1,0 +1,1 @@
+# This Project focuses on building on an Simple Expense Manager for daily track of expenses
