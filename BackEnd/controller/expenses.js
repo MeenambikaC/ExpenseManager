@@ -1,9 +1,9 @@
-const IncomeSchema = require("../modules/incomeModule")
+const ExpenseSchema = require("../modules/expenseModule")
 
-exports.addIncome=async (req,res)=>{
+exports.addExpense=async (req,res)=>{
     // console.log(req.body)
     const {title,amount,catagory,description,date}= req.body
-    const income =IncomeSchema({
+    const Expense =ExpenseSchema({
         title,
         amount,
         catagory,
@@ -18,20 +18,20 @@ exports.addIncome=async (req,res)=>{
         if(amount <= 0 || !amount === 'number'){ // Corrected the condition check for amount
             return res.status(400).json({message: 'Amount must be a positive number!'})
         }
-        await income.save()
-        res.status(200).json({message: 'Income Added'})
+        await Expense.save()
+        res.status(200).json({message: 'Expense Added'})
     } catch (error) {
         console.error(error); // Log the error to console for debugging
         res.status(500).json({error: error.message}); // Return the error message in the response
     }
 
-    console.log(income)
+    console.log(Expense)
 }
 
-exports.getIncomes=async(req,res)=>{
+exports.getExpenses=async(req,res)=>{
     try {
-        const incomes =await IncomeSchema.find().sort({createdAt: -1})
-        res.status(200).json(incomes)
+        const Expenses =await ExpenseSchema.find().sort({createdAt: -1})
+        res.status(200).json(Expenses)
         
     } catch (error) {
         res.status(500).json({message: 'Server Error'})
@@ -40,12 +40,12 @@ exports.getIncomes=async(req,res)=>{
 }
 
 
-exports.deleteIncome=async(req,res)=>{
+exports.deleteExpense=async(req,res)=>{
     const {id}= req.params;
     console.log(req.params)
-    IncomeSchema.findByIdAndDelete(id)
-        .then((income)=>{
-            res.status(200).json({message: "Income Deleted"})
+    ExpenseSchema.findByIdAndDelete(id)
+        .then((Expense)=>{
+            res.status(200).json({message: "Expense Deleted"})
         })
         .catch((error =>{
             res.status(500).json({error: error.message});
@@ -53,6 +53,3 @@ exports.deleteIncome=async(req,res)=>{
 }
 
 // TODO : Modify income - add code
-
-// ToDO: How to get id as param
-// TODO: ID not found
