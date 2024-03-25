@@ -19,7 +19,7 @@ exports.addExpense=async (req,res)=>{
             return res.status(400).json({message: 'Amount must be a positive number!'})
         }
         await Expense.save()
-        res.status(200).json({message: 'Expense Added'})
+        res.status(200).json({message: 'Expense Added Successfully'})
     } catch (error) {
         console.error(error); // Log the error to console for debugging
         res.status(500).json({error: error.message}); // Return the error message in the response
@@ -44,12 +44,32 @@ exports.deleteExpense=async(req,res)=>{
     const {id}= req.params;
     console.log(req.params)
     ExpenseSchema.findByIdAndDelete(id)
-        .then((Expense)=>{
-            res.status(200).json({message: "Expense Deleted"})
-        })
+    .then((expense) => {
+        if (!expense) {
+            return res.status(404).json({ message: "Expense specified not found" });
+        }
+        res.status(200).json({ message: "Expense Deleted Successfully" });
+    })
         .catch((error =>{
             res.status(500).json({error: error.message});
         }))
 }
 
-// TODO : Modify income - add code
+// TODO : Modify Expense - add code
+exports.modifyExpense = async (req, res) => {
+    const { id } = req.params;
+    const { fieldToUpdate, newValue } = req.body;
+    console.log(req.params)
+    console.log(req.body)
+    try {
+        const updatedExpense = await ExpenseSchema.findByIdAndUpdate(id, { [fieldToUpdate]: newValue }, { new: true });
+
+        if (!updatedExpense) {
+            return res.status(404).json({ message: "Expense specified not found" });
+        }
+
+        res.status(200).json({ message: "Expense updated successfully", updatedExpense });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};

@@ -19,7 +19,7 @@ exports.addIncome=async (req,res)=>{
             return res.status(400).json({message: 'Amount must be a positive number!'})
         }
         await income.save()
-        res.status(200).json({message: 'Income Added'})
+        res.status(200).json({message: 'Income Added Successfully'})
     } catch (error) {
         console.error(error); // Log the error to console for debugging
         res.status(500).json({error: error.message}); // Return the error message in the response
@@ -44,8 +44,11 @@ exports.deleteIncome=async(req,res)=>{
     const {id}= req.params;
     console.log(req.params)
     IncomeSchema.findByIdAndDelete(id)
-        .then((income)=>{
-            res.status(200).json({message: "Income Deleted"})
+        .then((income) => {
+            if (!income) {
+                return res.status(404).json({ message: "Income specified not found" });
+            }
+            res.status(200).json({ message: "Income Deleted Successfully" });
         })
         .catch((error =>{
             res.status(500).json({error: error.message});
@@ -53,6 +56,22 @@ exports.deleteIncome=async(req,res)=>{
 }
 
 // TODO : Modify income - add code
+exports.modifyIncome = async (req, res) => {
+    const { id } = req.params;
+    const { fieldToUpdate, newValue } = req.body;
+    console.log(req.params)
+    console.log(req.body)
+    try {
+        const updatedIncome = await IncomeSchema.findByIdAndUpdate(id, { [fieldToUpdate]: newValue }, { new: true });
 
-// ToDO: How to get id as param
-// TODO: ID not found
+        if (!updatedIncome) {
+            return res.status(404).json({ message: "Income specified not found" });
+        }
+
+        res.status(200).json({ message: "Income updated successfully", updatedIncome });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+
