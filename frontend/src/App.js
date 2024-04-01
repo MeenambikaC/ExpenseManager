@@ -1,11 +1,15 @@
 import styled from "styled-components";
 // import { GlobalStyle } from "./Styles/GlobalStyle";
 import bg from './img/bg.png'
+import { MainLayout } from "./Styles/layouts";
 
 function App() {
   return (
     <AppStyled bg={bg} className="App">
-      
+
+     <MainLayout>
+      <h1>Hello</h1>
+     </MainLayout>
     </AppStyled>
   );
 }
