@@ -1,15 +1,41 @@
 import styled from "styled-components";
+import React,{useMemo, useState} from "react";
 // import { GlobalStyle } from "./Styles/GlobalStyle";
 import bg from './img/bg.png'
 import { MainLayout } from "./Styles/layouts";
 import Orb from "./Components/Orb/Orb";
 import Navigation from "./Components/Navigation/Navigation";
+import Dashboard from "./Components/Dashboard/Dashboard";
+import Incomes from "./Components/Incomes/Incomes";
+import Expenses from "./Components/Expenses/Expenses";
 function App() {
+  const [active,setActive]=useState(1)
+
+  const displayData=()=>{
+    switch(active){
+      case 1:
+        return <Dashboard/>
+      case 2:
+        return <Dashboard/>
+      case 3:
+        return <Incomes/>
+      case 4:
+        return <Expenses/>
+      default:
+        return <Dashboard/>
+    }
+  }
+  const orbMemo=useMemo(()=>{
+    return <Orb/>
+  },[])
   return (
     <AppStyled bg={bg} className="App">
-      <Orb/>
+      {orbMemo}
      <MainLayout>
-      <Navigation></Navigation>
+      <Navigation active={active} setActive={setActive}></Navigation>
+      <main> 
+        {displayData()}
+      </main>
      </MainLayout>
     </AppStyled>
   );
@@ -17,16 +43,20 @@ function App() {
 
 
 const AppStyled = styled.div`
-  height: 100vh; 
+  height: 100vh;
   background-image: url(${props => props.bg});
-  background-repeat: no-repeat;
-  background-size: cover; 
-  background-position: center; 
-  position: fixed; 
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: relative;
+  main{
+    flex: 1; // TODO change
+    background: rgba(252, 246, 249, 0.78);
+    border: 3px solid #FFFFFF;
+    backdrop-filter: blur(4.5px);
+    border-radius: 32px;
+    overflow-x: hidden;
+    &::-webkit-scrollbar{
+      width: 0;
+    }
+  }
 `;
 
 export default App;
