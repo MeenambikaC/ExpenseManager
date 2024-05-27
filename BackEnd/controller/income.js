@@ -2,17 +2,17 @@ const IncomeSchema = require("../modules/incomeModule")
 
 exports.addIncome=async (req,res)=>{
     // console.log(req.body)
-    const {title,amount,catagory,description,date}= req.body
+    const {title,amount,category,description,date}= req.body
     const income =IncomeSchema({
         title,
         amount,
-        catagory,
+        category,
         description,
         date
     })
     try {
         //validations
-        if(!title || !catagory || !description || !date){
+        if(!title || !category || !description || !date){
             return res.status(400).json({message: 'All fields are required!'})
         }
         if(amount <= 0 || !amount === 'number'){ // Corrected the condition check for amount
