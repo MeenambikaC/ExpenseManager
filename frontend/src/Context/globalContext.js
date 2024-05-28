@@ -28,10 +28,10 @@ export const GlobalProvider = ({children}) => {
         console.log(response.data)
     }
 
-    // const deleteIncome = async (id) => {
-    //     const res  = await axios.delete(`${BASE_URL}delete-income/${id}`)
-    //     getIncomes()
-    // }
+    const deleteIncome = async (id) => {
+        const res  = await axios.delete(`${BASE_URL}delete-income/${id}`)
+        getIncomes()
+    }
 
     // const totalIncome = () => {
     //     let totalIncome = 0;
@@ -92,7 +92,7 @@ export const GlobalProvider = ({children}) => {
             addIncome,
             getIncomes,
             incomes,
-            // // deleteIncome,
+            deleteIncome,
             // expenses,
             // totalIncome,
             // addExpense,
