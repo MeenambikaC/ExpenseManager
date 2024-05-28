@@ -1,5 +1,5 @@
 import React from 'react'
-import { bitcoin, calender, card, comment, dollar, freelance, money, piggy, stocks, trash } from '../../Utils/Icons';
+import { bitcoin, book, calender, card, circle, clothing, comment, dollar, food, freelance, medical, money, piggy, stocks, takeaway, trash, trend } from '../../Utils/Icons';
 import Button from '../Button/Button';
 import styled from 'styled-components';
 
@@ -15,7 +15,7 @@ function IncomeItems({
     type
 }) {
 
-// 2.52
+// check if spellings are correct
     const categoryIcon=()=>{
         switch(category){
             case 'salary':
@@ -32,11 +32,39 @@ function IncomeItems({
                 return stocks
             case 'other':
                 return piggy
+            default:
+                return ''
+        }
+    }
+
+    // need to get icons for expense also
+    const ExpensecategoryIcon=()=>{
+        switch(category){
+            case 'education':
+                return book
+            case 'food':
+                return food
+            case 'health':
+                return medical
+            case 'clothing':
+                return clothing
+            case 'travelling':
+                return freelance
+            case 'takeaway':
+                return takeaway
+            case 'bills':
+                return trend
+            case 'other':
+                return circle
+            default:
+                return ''
         }
     }
   return (
     <IncomeItemsStyled indicator={indicatorColor}>
-      <div className="icon"></div>
+      <div className="icon">
+        {type==='expense' ?ExpensecategoryIcon():categoryIcon()}
+      </div>
       <div className="content">
         <h5>{title}</h5>
         <div className="inner-content">
