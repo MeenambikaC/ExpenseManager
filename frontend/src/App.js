@@ -46,12 +46,12 @@ function App() {
 
 
 const AppStyled = styled.div`
-  height: 100vh;
+  height: 500vh;
   background-image: url(${props => props.bg});
   position: relative;
   main{
     flex: 1; // TODO change
-    background: rgba(252, 246, 249, 0.78);
+    background: rgba(252, 246, 249, 0.58);
     border: 3px solid #FFFFFF;
     backdrop-filter: blur(4.5px);
     border-radius: 32px;

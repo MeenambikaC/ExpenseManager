@@ -33,44 +33,45 @@ export const GlobalProvider = ({children}) => {
         getIncomes()
     }
 
-    // const totalIncome = () => {
-    //     let totalIncome = 0;
-    //     incomes.forEach((income) =>{
-    //         totalIncome = totalIncome + income.amount
-    //     })
+    const totalIncome = () => {
+        let totalIncome = 0;
+        incomes.forEach((income) =>{
+            totalIncome = totalIncome + income.amount
+        })
 
-    //     return totalIncome;
-    // }
+        return totalIncome;
+    }
+    console.log(totalIncome())
 
 
-    // //calculate incomes
-    // const addExpense = async (expense) => {
-    //     const response = await axios.post(`${BASE_URL}add-expense`, expense)
-    //         .catch((err) =>{
-    //             setError(err.response.data.message)
-    //         })
-    //     getExpenses()
-    // }
+    // //calculate expense
+    const addExpense = async (expense) => {
+        const response = await axios.post(`${BASE_URL}add-expense`, expense)
+            .catch((err) =>{
+                setError(err.response.data.message)
+            })
+        getExpenses()
+    }
 
-    // const getExpenses = async () => {
-    //     const response = await axios.get(`${BASE_URL}get-expenses`)
-    //     setExpenses(response.data)
-    //     console.log(response.data)
-    // }
+    const getExpenses = async () => {
+        const response = await axios.get(`${BASE_URL}get-expenses`)
+        setExpenses(response.data)
+        console.log(response.data)
+    }
 
-    // const deleteExpense = async (id) => {
-    //     const res  = await axios.delete(`${BASE_URL}delete-expense/${id}`)
-    //     getExpenses()
-    // }
+    const deleteExpense = async (id) => {
+        const res  = await axios.delete(`${BASE_URL}delete-expense/${id}`)
+        getExpenses()
+    }
 
-    // const totalExpenses = () => {
-    //     let totalIncome = 0;
-    //     expenses.forEach((income) =>{
-    //         totalIncome = totalIncome + income.amount
-    //     })
+    const totalExpenses = () => {
+        let totalExpense = 0;
+        expenses.forEach((expense) =>{
+            totalExpense = totalExpense + expense.amount
+        })
 
-    //     return totalIncome;
-    // }
+        return totalExpense;
+    }
 
 
     // const totalBalance = () => {
@@ -93,12 +94,12 @@ export const GlobalProvider = ({children}) => {
             getIncomes,
             incomes,
             deleteIncome,
-            // expenses,
-            // totalIncome,
-            // addExpense,
-            // getExpenses,
-            // // deleteExpense,
-            // totalExpenses,
+            totalIncome,
+            expenses,
+            addExpense,
+            getExpenses,
+            deleteExpense,
+            totalExpenses,
             // totalBalance,
             // transactionHistory,
             // error,

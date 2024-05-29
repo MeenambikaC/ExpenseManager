@@ -1,7 +1,8 @@
 import React from 'react'
-import { bitcoin, book, calender, card, circle, clothing, comment, dollar, food, freelance, medical, money, piggy, stocks, takeaway, trash, trend } from '../../Utils/Icons';
+import { bitcoin, book, calender, card, circle, clothing, comment, dollar, food, freelance, medical, money, piggy, rupee, stocks, takeaway, trash, trend } from '../../Utils/Icons';
 import Button from '../Button/Button';
 import styled from 'styled-components';
+import { Date } from '../../Utils/Date';
 
 function IncomeItems({
     id,
@@ -30,16 +31,6 @@ function IncomeItems({
                 return stocks
             case 'mahapola':
                 return stocks
-            case 'other':
-                return piggy
-            default:
-                return ''
-        }
-    }
-
-    // need to get icons for expense also
-    const ExpensecategoryIcon=()=>{
-        switch(category){
             case 'education':
                 return book
             case 'food':
@@ -56,21 +47,24 @@ function IncomeItems({
                 return trend
             case 'other':
                 return circle
+            case 'book':
+                return book
             default:
                 return ''
         }
     }
+    console.log(type)
   return (
     <IncomeItemsStyled indicator={indicatorColor}>
       <div className="icon">
-        {type==='expense' ?ExpensecategoryIcon():categoryIcon()}
+        {categoryIcon()}
       </div>
       <div className="content">
         <h5>{title}</h5>
         <div className="inner-content">
             <div className="text">
-                <p>{dollar} {amount}</p>
-                <p>{calender} {date}</p>
+                <p>{rupee} {amount}</p>
+                <p>{calender} {Date(date)}</p>
                 <p>
                     {comment}
                     {description}
@@ -83,9 +77,10 @@ function IncomeItems({
                     bPad={'1rem'}
                     bRad={'50%'}
                     bg={'var(--primary-color'}
-                    color={'#fff'}
+                    color={'#f00'}
                     iColor={'#fff'}
                     hColor={'var(--color-green)'}
+                    onClick={()=>deleteItem(id)}
                 
                 />
             </div>

@@ -6,7 +6,7 @@ import Form from '../Forms/Form';
 import IncomeItems from '../IncomeItems/IncomeItems';
 
 function Incomes() {
-  const {addIncome,incomes,getIncomes}=useGlobalContext()
+  const {addIncome,incomes,getIncomes,deleteIncome,totalIncome}=useGlobalContext()
 
   useEffect(()=>{
     getIncomes()
@@ -16,6 +16,9 @@ function Incomes() {
       <IncomesStyled>
         <InnerLayout>
          <h1>Incomes</h1>
+         <h2 className="total-income">Total Income: 
+            <span>Rs.{totalIncome()}</span>
+         </h2>
          <div className="income-content">
           <div className="form-container">
             <Form/>
@@ -24,7 +27,7 @@ function Incomes() {
           <div className="incomes">
             {incomes.map((income)=>
               {
-                const{ _id,title,amount,date,category,description}=income;
+                const{ _id,title,amount,date,category,description,type}=income;
                 return <IncomeItems
                     key={_id}
                     id={_id}
@@ -33,7 +36,9 @@ function Incomes() {
                     amount={amount}
                     date={date}
                     category={category}
+                    type={type}
                     indicatorColor={"var(--color red)"}
+                    deleteItem={deleteIncome}
                     />
             })}
           </div>
@@ -46,10 +51,20 @@ function Incomes() {
 const IncomesStyled =styled.div`
     display:flex;
     overflow:auto;
+    gap: 100 rem;
+    .total-income{
+      display:flex;
+      overflow:auto;
+      backgroud:FCF6F9;
+    }
     .income-content{
-      gap: 1000 rem;
+      display:flex;
+      gap: 2 rem;
+      justify-content: space-between;
+      width: 1200px;
     }
     .income{
+      padding-left: 23px;
       flex:100
     }
 
