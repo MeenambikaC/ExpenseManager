@@ -15,7 +15,7 @@ app.get('/', (req,res)=>{
     res.send("Hello World!")
 })
 // read files inside routes folder
-readdirSync('./routes').map((route)=>app.use('/api/v1', require('./routes/'+ route)))
+readdirSync('.\routes').map((route)=>app.use('/api/v1', require('./routes/'+ route)))
 const server =()=>{
     db()
     app.listen(PORT,()=>{
