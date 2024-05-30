@@ -61,7 +61,7 @@ const IncomesStyled =styled.div`
       display:flex;
       gap: 2 rem;
       justify-content: space-between;
-      width: 1200px;
+      width: 1100px;
     }
     .income{
       padding-left: 23px;
