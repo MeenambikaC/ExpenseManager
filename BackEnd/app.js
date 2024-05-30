@@ -1,3 +1,5 @@
+// app.js
+
 const express = require('express');
 const cors = require('cors');
 const { db } = require('./db/db');
@@ -19,9 +21,8 @@ app.get('/', (req, res) => {
 try {
     const routeFiles = readdirSync('./routes');
     routeFiles.forEach((route) => {
-        const routePath = '/api/v1';
         const routeHandler = require(`./routes/${route}`);
-        app.use(routePath, routeHandler);
+        app.use(routeHandler);
     });
 } catch (error) {
     console.error('Error loading routes:', error);
