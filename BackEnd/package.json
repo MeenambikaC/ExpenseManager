@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
-    "build": "npm run build"
+    "build": "npm run build",
+    "install": "npm install express mongoose cors nodemon dotenv"
   },
   "author": "",
   "license": "ISC",
