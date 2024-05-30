@@ -28,6 +28,12 @@ try {
     console.error('Error loading routes:', error);
 }
 
+// Add a new route with a POST method
+app.post('/api/v1/create-resource', (req, res) => {
+    // Logic to create a new resource
+    res.send('Resource created');
+});
+
 // Establish database connection
 const connectDB = async () => {
     try {
