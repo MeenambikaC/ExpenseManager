@@ -3,7 +3,7 @@ const { addIncome, getIncomes, deleteIncome, modifyIncome } = require('../contro
 
 const router=require('express').Router()
 
-router.get('/',(req,res)=>{
+router.get('/app',(req,res)=>{
     res.send("Hello World from routes!")
 })
 
