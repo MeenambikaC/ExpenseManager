@@ -13,9 +13,9 @@ app.use(express.json());
 app.use(cors());
 
 // Accessing the home page
-app.get('/', (req, res) => {
-    res.send("Hello World!");
-});
+// app.get('/', (req, res) => {
+//     res.send("Hello World!");
+// });
 
 // Dynamically load routes from files inside the routes directory
 try {
