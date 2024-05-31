@@ -2,9 +2,9 @@ import React, { useContext, useState } from "react"
 import axios from 'axios'
 
 
-const BASE_URL = "https://expense-manager-vj1a-git-main-meenambikacs-projects.vercel.app/api/v1/";
+// const BASE_URL = "https://expense-manager-vj1a-git-main-meenambikacs-projects.vercel.app/api/v1/";
 
-
+const BASE_URL="http://localhost:5000/api/v1/"
 const GlobalContext = React.createContext()
 
 export const GlobalProvider = ({children}) => {
@@ -64,6 +64,29 @@ export const GlobalProvider = ({children}) => {
         getExpenses()
     }
 
+    const modifyIncome = async (id, fieldToUpdate, newValue) => {
+        try {
+            const res = await axios.put(`${BASE_URL}modify-income/${id}`, {
+                fieldToUpdate,
+                newValue
+            });
+            getIncomes(); // Assuming getExpenses is a function that fetches and updates the expenses after modification
+        } catch (error) {
+            console.error('Error modifying expense:', error);
+        }
+    }
+    const modifyExpense = async (id, fieldToUpdate, newValue) => {
+        try {
+            const res = await axios.put(`${BASE_URL}modify-expense/${id}`, {
+                fieldToUpdate,
+                newValue
+            });
+            getExpenses(); // Assuming getExpenses is a function that fetches and updates the expenses after modification
+        } catch (error) {
+            console.error('Error modifying expense:', error);
+        }
+    }
+
     const totalExpenses = () => {
         let totalExpense = 0;
         expenses.forEach((expense) =>{
@@ -103,7 +126,9 @@ export const GlobalProvider = ({children}) => {
             totalBalance,
             transactionHistory,
             error,
-            setError
+            setError,
+            modifyIncome,
+            modifyExpense
         }}>
             {children}
         </GlobalContext.Provider>

@@ -7,7 +7,7 @@ import IncomeItems from '../IncomeItems/IncomeItems';
 import ExpenseForm from './ExpenseForm';
 
 function Expenses() {
-  const {addIncome,expenses,getIncomes,getExpenses,totalExpenses,deleteIncome,totalIncome,deleteExpense}=useGlobalContext()
+  const {addIncome,expenses,getIncomes,getExpenses,totalExpenses,deleteIncome,totalIncome,deleteExpense,modifyExpense}=useGlobalContext()
 
   useEffect(()=>{
     getExpenses()
@@ -40,6 +40,7 @@ function Expenses() {
                     category={category}
                     indicatorColor={"var(--color red)"}
                     deleteItem={deleteExpense}
+                    updateItem={modifyExpense}
                     />
             })}
           </div>
@@ -62,7 +63,7 @@ const ExpenseStyled =styled.div`
       display:flex;
       gap: 2 rem;
       justify-content: space-between;
-      width: 1200px;
+      width: 1000px;
     }
     .income{
       padding-left: 23px;

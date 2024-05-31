@@ -1,5 +1,5 @@
-import React from 'react'
-import { bitcoin, book, calender, card, circle, clothing, comment, dollar, food, freelance, medical, money, piggy, rupee, stocks, takeaway, trash, trend } from '../../Utils/Icons';
+import React, { useState } from 'react';
+import { bitcoin, book, calender, card, circle, clothing, comment, dollar, food, freelance, logout, medical, money, piggy, rupee, settings, stocks, takeaway, trash, trend } from '../../Utils/Icons';
 import Button from '../Button/Button';
 import styled from 'styled-components';
 import { Date } from '../../Utils/Date';
@@ -13,86 +13,179 @@ function IncomeItems({
     description,
     deleteItem,
     indicatorColor,
-    type
+    type,
+    updateItem
 }) {
+    const [isEditing, setIsEditing] = useState(false);
+    const [updatedCategory, setUpdatedCategory] = useState(category);
+    const [fieldToUpdate, setfieldToUpdate] = useState('amount');
+    const [newValue, setnewValue] = useState(amount);
 
-// check if spellings are correct
-    const categoryIcon=()=>{
-        switch(category){
+    const categoryIcon = () => {
+        switch (category) {
             case 'salary':
-                return money
+                return money;
             case 'bonus':
-                return freelance
+                return freelance;
             case 'bank':
-                return card
+                return card;
             case 'gift':
-                return bitcoin
+                return bitcoin;
             case 'investment':
-                return stocks
+                return stocks;
             case 'mahapola':
-                return stocks
+                return stocks;
             case 'education':
-                return book
+                return book;
             case 'food':
-                return food
+                return food;
             case 'health':
-                return medical
+                return medical;
             case 'clothing':
-                return clothing
+                return clothing;
             case 'travelling':
-                return freelance
+                return freelance;
             case 'takeaway':
-                return takeaway
+                return takeaway;
             case 'bills':
-                return trend
+                return trend;
             case 'other':
-                return circle
+                return circle;
             case 'book':
-                return book
+                return book;
             default:
-                return ''
+                return '';
         }
-    }
-    console.log(type)
-  return (
-    <IncomeItemsStyled indicator={indicatorColor}>
-      <div className="icon">
-        {categoryIcon()}
-      </div>
-      <div className="content">
-        <h5>{title}</h5>
-        <div className="inner-content">
-            <div className="text">
-                <p>{rupee} {amount}</p>
-                <p>{calender} {Date(date)}</p>
-                <p>
-                    {comment}
-                    {description}
-                </p>
+    };
 
+    const handleEditClick = () => {
+        setIsEditing(true);
+    };
+
+    const handleSaveClick = () => {
+        updateItem(id, fieldToUpdate, newValue);
+        setIsEditing(false);
+    };
+
+    const handleFieldChange = (e) => {
+        setfieldToUpdate(e.target.value);
+        setnewValue(''); // Reset value on field change
+    };
+
+    const getInputType = () => {
+        switch (fieldToUpdate) {
+            case 'amount':
+                return 'number';
+            case 'date':
+                return 'date';
+            case 'category':
+                return 'dropdown'; // For category, return a special value indicating a dropdown
+            default:
+                return 'text';
+        }
+    };
+    
+
+    return (
+        <IncomeItemsStyled indicator={indicatorColor}>
+            <div className="icon">
+                {categoryIcon()}
             </div>
-            <div className="btn-con">
-                <Button
-                    icon={trash}
-                    bPad={'1rem'}
-                    bRad={'50%'}
-                    bg={'var(--primary-color'}
-                    color={'#f00'}
-                    iColor={'#fff'}
-                    hColor={'var(--color-green)'}
-                    onClick={()=>deleteItem(id)}
-                
-                />
+            <div className="content">
+                <h5>{title}</h5>
+                <div className="inner-content">
+                    <div className="text">
+                        <p>{rupee} {amount}</p>
+                        <p>{calender} {Date(date)}</p>
+                        <p>
+                            {comment}
+                            {description}
+                        </p>
+                    </div>
+                    <div className="btn-con">
+                        <Button
+                            icon={trash}
+                            bPad={'1rem'}
+                            bRad={'50%'}
+                            bg={'var(--primary-color)'}
+                            color={'#f00'}
+                            iColor={'#fff'}
+                            hColor={'var(--color-green)'}
+                            onClick={() => deleteItem(id)}
+                        />
+                        <Button
+                            icon={settings}
+                            text="Edit"
+                            bPad={'1rem'}
+                            bRad={'5px'}
+                            bg={'var(--primary-color)'}
+                            color={'#4B78A8'}
+                            iColor={'#fff'}
+                            hColor={'var(--color-green)'}
+                            onClick={handleEditClick}
+                        />
+                    </div>
+                </div>
+                {isEditing && (
+                    <div className="edit-section">
+                        <select
+                            value={fieldToUpdate}
+                            onChange={handleFieldChange}
+                        >
+                            <option value="title">Title</option>
+                            <option value="amount">Amount</option>
+                            <option value="category">Category</option>
+                            <option value="date">Date</option>
+                            <option value="description">Description</option>
+                        </select>
+                        {getInputType() === 'dropdown' ? (
+                            <select
+                                value={newValue}
+                                onChange={(e) => setnewValue(e.target.value)}
+                            >
+                                <option value=""  disabled >Select Option</option>
+                                <option value="salary">Salary</option>
+                                <option value="bonus">Bonus</option>
+                                <option value="investments">Investiments</option>
+                                <option value="bank">Bank Transfer</option>  
+                                <option value="mahapola">Mahapola</option> 
+                                <option value="gift">Gift</option> 
+                                <option value="other">Other</option>  
+                                <option value="education">Education</option>
+                                <option value="food">Food</option>
+                                <option value="health">Health</option>
+                                <option value="clothing">Clothing</option>  
+                                <option value="travelling">Trevelling</option> 
+                                <option value="takeaway">Takeaway</option> 
+                                <option value="bills">Bills</option>  
+                                <option value="book">Book</option>
+                                <option value="other">Other</option>
+                            </select>
+                        ) : (
+                        <input
+                            type={getInputType()}
+                            value={newValue}
+                            onChange={(e) => setnewValue(e.target.value)}
+                        />)}
+                        <Button
+                            icon={logout}
+                            text="Save"
+                            bPad={'1rem'}
+                            bRad={'5px'}
+                            bg={'var(--primary-color)'}
+                            color={'#f00'}
+                            iColor={'#fff'}
+                            hColor={'var(--color-green)'}
+                            onClick={handleSaveClick}
+                        />
+                    </div>
+                )}
             </div>
-        </div>
-      </div>
-    </IncomeItemsStyled>
-  )
+        </IncomeItemsStyled>
+    );
 }
 
-
-// ## these values can be changed
-const IncomeItemsStyled =styled.div`
+const IncomeItemsStyled = styled.div`
     background: #FCF6F9;
     border: 2px solid #FFFFFF;
     box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
@@ -156,6 +249,18 @@ const IncomeItemsStyled =styled.div`
                 }
             }
         }
+        .edit-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            select, input {
+                padding: 0.5rem;
+                border: 1px solid var(--primary-color);
+                border-radius: 5px;
+            }
+        }
     }
 `;
-export default IncomeItems
+
+export default IncomeItems;
