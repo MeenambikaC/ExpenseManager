@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React,{useMemo, useState} from "react";
-// import { GlobalStyle } from "./Styles/GlobalStyle";
+import { GlobalStyle } from "./Styles/GlobalStyle";
 import bg from './img/bg.png'
 import { MainLayout } from "./Styles/layouts";
 import Orb from "./Components/Orb/Orb";
@@ -46,7 +46,7 @@ function App() {
 
 
 const AppStyled = styled.div`
-  height: 500vh;
+  // height: 150vh;
   background-image: url(${props => props.bg});
   position: relative;
   main{
