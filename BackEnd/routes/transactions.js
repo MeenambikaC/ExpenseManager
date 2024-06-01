@@ -1,6 +1,6 @@
 const { addExpense, getExpenses, deleteExpense, modifyExpense } = require('../controller/expenses')
 const { addIncome, getIncomes, deleteIncome, modifyIncome } = require('../controller/income')
-const {addReminder,getReminder,deleteReminder,modifyReminder}=require('../controller/reminder')
+const {addReminder,getReminders,deleteReminder,modifyReminder}=require('../controller/reminder')
 const router=require('express').Router()
 
 router.get('/app',(req,res)=>{

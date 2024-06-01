@@ -9,6 +9,7 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import Incomes from "./Components/Incomes/Incomes";
 import Expenses from "./Components/Expenses/Expenses";
 import { useGlobalContext } from "./Context/globalContext";
+import Reminders from "./Components/Reminders/Reminders";
 function App() {
   const [active,setActive]=useState(1)
 
@@ -24,6 +25,8 @@ function App() {
         return <Incomes/>
       case 4:
         return <Expenses/>
+      case 5:
+        return <Reminders/>
       default:
         return <Dashboard/>
     }

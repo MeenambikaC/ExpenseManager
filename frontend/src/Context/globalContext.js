@@ -11,6 +11,7 @@ export const GlobalProvider = ({children}) => {
 
     const [incomes, setIncomes] = useState([])
     const [expenses, setExpenses] = useState([])
+    const [reminders,setReminders]=useState([])
     const [error, setError] = useState(null)
 
     //calculate incomes
@@ -100,6 +101,46 @@ export const GlobalProvider = ({children}) => {
     const totalBalance = () => {
         return totalIncome() - totalExpenses()
     }
+    const addReminder = async (reminder) => {
+        const response = await axios.post(`${BASE_URL}add-reminder`, reminder)
+            .catch((err) =>{
+                setError(err.response.data.message)
+            })
+        getReminders()
+    }
+
+    const getReminders = async () => {
+        const response = await axios.get(`${BASE_URL}get-reminders`)
+        setReminders(response.data)
+        console.log(response.data)
+    }
+
+    const deleteReminder = async (id) => {
+        const res  = await axios.delete(`${BASE_URL}delete-reminder/${id}`)
+        getReminders()
+    }
+
+    const totalReminder = () => {
+        let totalReminder = 0;
+        reminders.forEach((reminder) =>{
+            totalReminder = totalReminder + reminder.amount
+        })
+
+        return totalReminder;
+    }
+    console.log(totalReminder())
+
+    const modifyReminder = async (id, fieldToUpdate, newValue) => {
+        try {
+            const res = await axios.put(`${BASE_URL}modify-reminder/${id}`, {
+                fieldToUpdate,
+                newValue
+            });
+            getReminders(); // Assuming getExpenses is a function that fetches and updates the expenses after modification
+        } catch (error) {
+            console.error('Error modifying expense:', error);
+        }
+    }
 
     const transactionHistory = () => {
         const history = [...incomes, ...expenses]
@@ -128,7 +169,13 @@ export const GlobalProvider = ({children}) => {
             error,
             setError,
             modifyIncome,
-            modifyExpense
+            modifyExpense,
+            reminders,
+            addReminder,
+            getReminders,
+            deleteReminder,
+            modifyReminder,
+            totalReminder
         }}>
             {children}
         </GlobalContext.Provider>
