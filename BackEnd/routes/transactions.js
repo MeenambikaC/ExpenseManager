@@ -1,6 +1,6 @@
 const { addExpense, getExpenses, deleteExpense, modifyExpense } = require('../controller/expenses')
 const { addIncome, getIncomes, deleteIncome, modifyIncome } = require('../controller/income')
-
+const {addReminder,getReminder,deleteReminder,modifyReminder}=require('../controller/reminder')
 const router=require('express').Router()
 
 router.get('/app',(req,res)=>{
@@ -15,6 +15,10 @@ router.post('/add-income', addIncome)
       .get('/get-expenses', getExpenses)
       .delete('/delete-expense/:id', deleteExpense)
       .put('/modify-expense/:id', modifyExpense)
+      .post('/add-reminder', addReminder)
+      .get('/get-reminders', getReminder)
+      .delete('/delete-reminder/:id', deleteReminder)
+      .put('/modify-reminder/:id', modifyReminder)
       
 
 
