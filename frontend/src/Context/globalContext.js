@@ -12,6 +12,7 @@ export const GlobalProvider = ({children}) => {
     const [incomes, setIncomes] = useState([])
     const [expenses, setExpenses] = useState([])
     const [reminders,setReminders]=useState([])
+    const[login,setLogin]=useState([])
     const [error, setError] = useState(null)
 
     //calculate incomes
@@ -150,6 +151,12 @@ export const GlobalProvider = ({children}) => {
 
         return history.slice(0, 4)
     }
+    const addLogin = async (login) => {
+        const response = await axios.post(`${BASE_URL}login`, login)
+            .catch((err) =>{
+                setError(err.response.data.message)
+            })
+    }
 
 
     return (
@@ -175,7 +182,9 @@ export const GlobalProvider = ({children}) => {
             getReminders,
             deleteReminder,
             modifyReminder,
-            totalReminder
+            totalReminder,
+            login,
+            addLogin
         }}>
             {children}
         </GlobalContext.Provider>

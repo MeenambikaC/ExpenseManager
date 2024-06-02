@@ -10,6 +10,7 @@ import Incomes from "./Components/Incomes/Incomes";
 import Expenses from "./Components/Expenses/Expenses";
 import { useGlobalContext } from "./Context/globalContext";
 import Reminders from "./Components/Reminders/Reminders";
+import LoginForm from "./Components/Login/LoginForm";
 function App() {
   const [active,setActive]=useState(1)
 
@@ -27,6 +28,8 @@ function App() {
         return <Expenses/>
       case 5:
         return <Reminders/>
+      case 6:
+        return <LoginForm/>
       default:
         return <Dashboard/>
     }
