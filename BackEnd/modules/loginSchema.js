@@ -17,6 +17,10 @@ const loginSchema =new mongoose.Schema({
         type:String,
         default:"login",
     },
+    loginStatus:{
+        type:String,
+        default:"failed",
+    },
 
 }, {timestamps:true})
 
