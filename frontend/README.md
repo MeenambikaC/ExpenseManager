@@ -5,4 +5,5 @@
 4. `npm run build`
 5. `npm install -g serve`
 6. `serve -s build `
-7. Shortcut to create functions `rfce`
+7. `npm install react-router-dom`
+8. Shortcut to create functions `rfce`

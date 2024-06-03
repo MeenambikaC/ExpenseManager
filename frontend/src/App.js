@@ -11,6 +11,7 @@ import Expenses from "./Components/Expenses/Expenses";
 import { useGlobalContext } from "./Context/globalContext";
 import Reminders from "./Components/Reminders/Reminders";
 import LoginForm from "./Components/Login/LoginForm";
+import Login from "./Components/Login/Login";
 function App() {
   const [active,setActive]=useState(1)
 
@@ -18,18 +19,18 @@ function App() {
   console.log(global)
   const displayData=()=>{
     switch(active){
-      case 1:
-        return <Dashboard/>
       case 2:
         return <Dashboard/>
       case 3:
-        return <Incomes/>
+        return <Dashboard/>
       case 4:
-        return <Expenses/>
+        return <Incomes/>
       case 5:
-        return <Reminders/>
+        return <Expenses/>
       case 6:
-        return <LoginForm/>
+        return <Reminders/>
+      case 1:
+        return <Login/>
       default:
         return <Dashboard/>
     }
