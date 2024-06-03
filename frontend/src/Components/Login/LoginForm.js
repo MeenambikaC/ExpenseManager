@@ -5,7 +5,7 @@ import Button from '../Button/Button';
 import { plus } from '../../Utils/Icons';
 
 function LoginForm() {
-    const { login, error, setError,addLogin } = useGlobalContext();
+    const { login, error, setError,addLogin ,getLoginStatus} = useGlobalContext();
     const [inputState, setInputState] = useState({
         username: '',
         password: ''
@@ -20,6 +20,7 @@ function LoginForm() {
     const handleSubmit = e => {
         e.preventDefault();
         addLogin(inputState);
+        getLoginStatus()
         setInputState({
             username: '',
             password: ''

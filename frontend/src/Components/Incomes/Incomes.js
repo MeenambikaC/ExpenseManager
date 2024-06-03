@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import styled from 'styled-components';
 import { InnerLayout } from '../../Styles/layouts';
 import { useGlobalContext } from '../../Context/globalContext';
@@ -6,11 +6,38 @@ import Form from '../Forms/Form';
 import IncomeItems from '../IncomeItems/IncomeItems';
 
 function Incomes() {
-  const {addIncome,incomes,getIncomes,deleteIncome,totalIncome,modifyIncome}=useGlobalContext()
+  const {addIncome,incomes,getIncomes,deleteIncome,totalIncome,modifyIncome,getLoginStatus}=useGlobalContext()
+  const [loginStatus, setLoginStatus] = useState('');
+  const [initialEffectRun, setInitialEffectRun] = useState(false);
 
-  useEffect(()=>{
-    getIncomes()
-  },[])
+  useEffect(() => {
+    if (!initialEffectRun) {
+      const fetchData = async () => {
+        try {
+          const status = await getLoginStatus();
+          setLoginStatus(status);
+          getIncomes();
+        } catch (error) {
+          console.error('Error fetching login status:', error);
+        }
+      };
+      fetchData();
+      setInitialEffectRun(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getLoginStatus, getIncomes, initialEffectRun]);
+
+  if (!loginStatus) {
+    return <div>Loading...</div>;
+  }
+
+  // Assuming loginStatus is a string indicating login status
+  console.log(loginStatus)
+  const { loginStatus: status } = loginStatus;
+  console.log(status)
+  if (status !== 'successful') {
+    return <div><h2 style={{ color: 'red' }}>Login unsuccessful. Please log in to view your expenses.</h2></div>;
+  }
   return (
     <div>
       <IncomesStyled>

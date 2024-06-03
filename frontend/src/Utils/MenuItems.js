@@ -1,4 +1,4 @@
-import {dashboard, expenses, login, reminder, transactions, trend} from '../Utils/Icons'
+import {dashboard, expenses, login, reminder, signout, transactions, trend} from '../Utils/Icons'
 export const menuItems=[
     {
         id:1,
@@ -40,6 +40,13 @@ export const menuItems=[
         title:'Reminders',
         icon:reminder,
         link:'/dashboard',
+        
+    },
+    {
+        id:7,
+        title:'SignOut',
+        icon:signout,
+        link:'/login',
         
     }
     

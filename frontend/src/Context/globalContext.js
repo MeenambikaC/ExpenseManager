@@ -156,6 +156,16 @@ export const GlobalProvider = ({children}) => {
             .catch((err) =>{
                 setError(err.response.data.message)
             })
+        getLoginStatus()
+    }
+
+    const getLoginStatus= async () => {
+        const response = await axios.get(`${BASE_URL}get-loginstatus`)
+        setLogin(response.data)
+        // console.log(response.data)
+
+        return response.data
+
     }
 
 
@@ -184,7 +194,8 @@ export const GlobalProvider = ({children}) => {
             modifyReminder,
             totalReminder,
             login,
-            addLogin
+            addLogin,
+            getLoginStatus
         }}>
             {children}
         </GlobalContext.Provider>

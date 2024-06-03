@@ -12,6 +12,7 @@ import { useGlobalContext } from "./Context/globalContext";
 import Reminders from "./Components/Reminders/Reminders";
 import LoginForm from "./Components/Login/LoginForm";
 import Login from "./Components/Login/Login";
+
 function App() {
   const [active,setActive]=useState(1)
 
@@ -31,6 +32,8 @@ function App() {
         return <Reminders/>
       case 1:
         return <Login/>
+      case 7:
+          return <Login/>
       default:
         return <Dashboard/>
     }

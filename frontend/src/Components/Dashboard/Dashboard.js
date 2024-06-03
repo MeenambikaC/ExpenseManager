@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import styled from 'styled-components';
 import { InnerLayout } from '../../Styles/layouts';
 import Chart from '../Chart/Chart';
@@ -7,12 +7,40 @@ import { useGlobalContext } from '../../Context/globalContext';
 import History from '../History/History';
 
 function Dashboard() {
-  const {totalIncome,incomes,totalExpenses,totalBalance,getIncomes,getExpenses,expenses}=useGlobalContext()
+  const {totalIncome,incomes,totalExpenses,totalBalance,getIncomes,getExpenses,expenses,getLoginStatus}=useGlobalContext()
+  const [loginStatus, setLoginStatus] = useState('');
+  const [initialEffectRun, setInitialEffectRun] = useState(false);
 
-  useEffect(()=>{
-    getIncomes()
-    getExpenses()
-  },[])
+  useEffect(() => {
+    if (!initialEffectRun) {
+      const fetchData = async () => {
+        try {
+          const status = await getLoginStatus();
+          setLoginStatus(status);
+          getIncomes()
+          getExpenses()
+        } catch (error) {
+          console.error('Error fetching login status:', error);
+        }
+      };
+      fetchData();
+      setInitialEffectRun(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getLoginStatus, getIncomes,getExpenses, initialEffectRun]);
+
+  if (!loginStatus) {
+    return <div>Loading...</div>;
+  }
+
+  // Assuming loginStatus is a string indicating login status
+  console.log(loginStatus)
+  const { loginStatus: status } = loginStatus;
+  console.log(status)
+  if (status !== 'successful') {
+    return <div><h2 style={{ color: 'red' }}>Login unsuccessful. Please log in to view your expenses.</h2></div>;
+  }
+
   return (
     <div>
       <DashboardStyled>

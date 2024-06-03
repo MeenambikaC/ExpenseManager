@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import styled from 'styled-components';
 import { InnerLayout } from '../../Styles/layouts';
 import { useGlobalContext } from '../../Context/globalContext';
@@ -7,11 +7,38 @@ import IncomeItems from '../IncomeItems/IncomeItems';
 import ReminderForm from './ReminderForm';
 
 function Reminders() {
-  const {reminders,getReminders,totalReminder,deleteReminder,modifyReminder}=useGlobalContext()
+  const {reminders,getReminders,totalReminder,deleteReminder,modifyReminder,getLoginStatus}=useGlobalContext()
+  const [loginStatus, setLoginStatus] = useState('');
+  const [initialEffectRun, setInitialEffectRun] = useState(false);
 
-  useEffect(()=>{
-    getReminders()
-  },[])
+  useEffect(() => {
+    if (!initialEffectRun) {
+      const fetchData = async () => {
+        try {
+          const status = await getLoginStatus();
+          setLoginStatus(status);
+          getReminders();
+        } catch (error) {
+          console.error('Error fetching login status:', error);
+        }
+      };
+      fetchData();
+      setInitialEffectRun(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getLoginStatus, getReminders, initialEffectRun]);
+
+  if (!loginStatus) {
+    return <div>Loading...</div>;
+  }
+
+  // Assuming loginStatus is a string indicating login status
+  console.log(loginStatus)
+  const { loginStatus: status } = loginStatus;
+  console.log(status)
+  if (status !== 'successful') {
+    return <div><h2 style={{ color: 'red' }}>Login unsuccessful. Please log in to view your expenses.</h2></div>;
+  }
   return (
     <div>
       <RemindersStyled>

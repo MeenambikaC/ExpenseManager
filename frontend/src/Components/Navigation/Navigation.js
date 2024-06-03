@@ -3,8 +3,20 @@ import styled from 'styled-components';
 import avatar from '../../img/avatar.png';
 import { menuItems } from '../../Utils/MenuItems';
 import { signout } from '../../Utils/Icons';
+import { useGlobalContext } from '../../Context/globalContext';
 
 function Navigation({ active, setActive }) {
+  const {addLogin,getLoginStatus}=useGlobalContext()
+  const [inputState, setInputState] = useState({
+    username: 'M',
+    password: 'E'
+  });
+
+  const { username, password } = inputState;
+  const handleSignOutClick = () => {
+    addLogin(inputState);
+    getLoginStatus();
+  };
   return (
     <NavStyled>
       <div className="user-container">
@@ -15,22 +27,37 @@ function Navigation({ active, setActive }) {
         </div>
       </div>
       <ul className="menu-items">
-        {menuItems.map((item) => (
-          <li
-            key={item.id}
-            onClick={() => setActive(item.id)}
-            className={active === item.id ? 'active' : ''}
-          >
-            {item.icon}
-            <span>{item.title}</span>
-          </li>
-        ))}
+      {menuItems.map((item) => {
+          if (item.id === 7) {
+            return (
+              <React.Fragment key={item.id}>
+                <div className="bottom-nav">
+                  <li onClick={handleSignOutClick}>
+                    {signout} Sign out
+                  </li>
+                </div>
+              </React.Fragment>
+            );
+          }
+
+          return (
+            <li
+              key={item.id}
+              onClick={() => setActive(item.id)}
+              className={active === item.id ? 'active' : ''}
+            >
+              {item.icon}
+              <span>{item.title}</span>
+            </li>
+          );
+        })}
+
       </ul>
-      <div className="bottom-nav">
-        <li>
-          {signout} Sign out
+      {/* <div className="bottom-nav">
+        <li onClick={handleSignOutClick}>
+        {signout}Sign out
         </li>
-      </div>
+      </div> */}
     </NavStyled>
   );
 }
