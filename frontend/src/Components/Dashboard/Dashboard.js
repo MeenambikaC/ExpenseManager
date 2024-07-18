@@ -134,6 +134,7 @@ const DashboardStyled =styled.div`
               flex-direction: column;
               justify-content: center;
               align-items: center;
+              width:300px;
               p{
                   // padding:2px;
                   color: green;

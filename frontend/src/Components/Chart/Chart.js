@@ -58,13 +58,13 @@
 // `;
 // export default Chart
 import React from 'react'
-import { Chart as ChartJs, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js'
+import { Chart as ChartJs, CategoryScale, LinearScale, LogarithmicScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js'
 import { Line } from 'react-chartjs-2'
 import styled from 'styled-components'
 import { useGlobalContext } from '../../Context/globalContext'
 import { format, subDays, eachDayOfInterval } from 'date-fns'
 
-ChartJs.register(CategoryScale, LinearScale, PointElement, Title, LineElement, Tooltip, Legend, ArcElement)
+ChartJs.register(CategoryScale, LinearScale, LogarithmicScale, PointElement, Title, LineElement, Tooltip, Legend, ArcElement)
 
 function Chart() {
     const { incomes, expenses } = useGlobalContext()
@@ -118,12 +118,31 @@ function Chart() {
         ]
     }
 
+    const options = {
+        scales: {
+            y: {
+                type: 'logarithmic',
+                title: {
+                    display: true,
+                    text: 'Amount'
+                },
+                min: 1, // Adjust this value based on your data range
+                ticks: {
+                    callback: function (value) {
+                        return value.toLocaleString(); // Format the ticks to be more readable
+                    }
+                }
+            }
+        }
+    }
+
     return (
         <ChartStyled>
-            <Line data={data} />
+            <Line data={data} options={options} />
         </ChartStyled>
     )
 }
+
 
 const ChartStyled = styled.div`
     background: #FCF6F9;
