@@ -102,6 +102,7 @@ function Chart() {
                 data: mergedIncomes,
                 backgroundColor: 'green',
                 borderColor: 'green',
+                pointRadius: mergedIncomes.map(value => value === 0 ? 0 : 3),  // Set point radius conditionally
                 tension: 0.2,
                 fill: false
             },
@@ -110,6 +111,7 @@ function Chart() {
                 data: mergedExpenses,
                 backgroundColor: 'red',
                 borderColor: 'red',
+                pointRadius: mergedExpenses.map(value => value === 0 ? 0 : 3),  // Set point radius conditionally
                 tension: 0.2,
                 fill: false
             }
@@ -133,4 +135,3 @@ const ChartStyled = styled.div`
 `
 
 export default Chart
-
