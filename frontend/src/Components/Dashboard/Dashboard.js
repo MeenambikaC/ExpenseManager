@@ -105,7 +105,7 @@ const DashboardStyled =styled.div`
   grid-template-columns: repeat(5, 1fr);
   gap: 2rem;
   .chart-con{
-      grid-column: 1 / 4;
+      grid-column: 1 / 3;
       height: 400px;
       .amount-con{
           display: grid;
@@ -129,7 +129,7 @@ const DashboardStyled =styled.div`
           }
 
           .balance{
-              grid-column: 2 / 4;
+              grid-column: 2 / 3;
               display: flex;
               flex-direction: column;
               justify-content: center;
@@ -145,7 +145,7 @@ const DashboardStyled =styled.div`
   }
 
   .history-con{
-      grid-column: 4 / 5;
+      grid-column: 4 / ;
       h2{
           margin: 1rem 0;
           display: flex;

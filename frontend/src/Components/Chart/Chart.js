@@ -132,6 +132,8 @@ const ChartStyled = styled.div`
     padding: 1rem;
     border-radius: 20px;
     height: 100%;
+    width: 600px;
+    align-items:center;
 `
 
 export default Chart
