@@ -1,5 +1,5 @@
 const ReminderSchema = require("../modules/ReminderSchema")
-const sendReminderEmail = require('./sendEmail');
+// const sendReminderEmail = require('./sendEmail');
 exports.addReminder=async (req,res)=>{
     // console.log(req.body)
     const {title,amount,category,description,date,email}= req.body

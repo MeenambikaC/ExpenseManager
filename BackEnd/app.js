@@ -4,8 +4,8 @@ const { db } = require('./db/db');
 const fs = require('fs');
 const path = require('path');
 const cron = require('node-cron');
-const sendReminderEmail = require('./controller/sendEmail'); // Ensure this is correct
-const { sendRemindersForToday } = require('./controller/reminder'); // Ensure this is correct
+// const sendReminderEmail = require('./controller/sendEmail'); // Ensure this is correct
+// const { sendRemindersForToday } = require('./controller/reminder'); // Ensure this is correct
 
 require('dotenv').config();
 const PORT = process.env.PORT;
