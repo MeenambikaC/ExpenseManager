@@ -3,7 +3,7 @@ const { addIncome, getIncomes, deleteIncome, modifyIncome } = require('../contro
 const {addReminder,getReminder,deleteReminder,modifyReminder,sendRemindersForToday}=require('../controller/reminder')
 const{login, getLoginStatus}=require('../controller/login')
 const router=require('express').Router()
-const cron=require('../api/cron')
+// const cron=require('../api/cron')
 router.get('/app',(req,res)=>{
     res.send("Hello World from routes!")
 })
@@ -23,7 +23,7 @@ router.post('/add-income', addIncome)
       .post('/login',login)
       .get('/get-loginstatus', getLoginStatus)
       .get('/send-reminders-for-today', sendRemindersForToday)
-      .get('cron',cron);
+    //   .get('cron',cron);
 
       
 
