@@ -42,16 +42,16 @@ const startServer = () => {
     });
 
     // Cron job to send reminder emails every day at 00:15 and 06:15
-    cron.schedule('00 8,15 * * *', async () =>{
-    // cron.schedule('53 0,6 * * *', async () => {
-        try {
-            // Call the function directly
-            await sendRemindersForToday({}, {}); // Pass empty request and response objects
-            // console.log('Reminder emails sent successfully for today');
-        } catch (error) {
-            console.error('Error sending reminder emails1:', error);
-        }
-    });
+    // cron.schedule('00 8,15 * * *', async () =>{
+    // // cron.schedule('53 0,6 * * *', async () => {
+    //     try {
+    //         // Call the function directly
+    //         await sendRemindersForToday({}, {}); // Pass empty request and response objects
+    //         // console.log('Reminder emails sent successfully for today');
+    //     } catch (error) {
+    //         console.error('Error sending reminder emails1:', error);
+    //     }
+    // });
 };
 
 // Start the server
