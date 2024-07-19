@@ -129,7 +129,7 @@ const DashboardStyled =styled.div`
           }
 
           .balance{
-              grid-column: 2 / 3;
+              grid-column: 2 / 4;
               display: flex;
               flex-direction: column;
               justify-content: center;
@@ -146,7 +146,7 @@ const DashboardStyled =styled.div`
   }
 
   .history-con{
-      grid-column: 4 / ;
+      grid-column: 5 / ;
       h2{
           margin: 1rem 0;
           display: flex;
