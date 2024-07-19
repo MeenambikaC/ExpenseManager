@@ -22,7 +22,7 @@ router.post('/add-income', addIncome)
       .put('/modify-reminder/:id', modifyReminder)
       .post('/login',login)
       .get('/get-loginstatus', getLoginStatus)
-      .get('/send-reminders-for-today', sendRemindersForToday);
+    //   .get('/send-reminders-for-today', sendRemindersForToday);
       
 
 
