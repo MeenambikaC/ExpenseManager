@@ -40,7 +40,7 @@ const startServer = () => {
         console.log('Server is listening on port:', PORT);
     });
     // Cron job to send reminder emails every day at 00:15 and 06:15
-    cron.schedule('06 14,15 * * *', async () =>{
+    cron.schedule('25 14,15 * * *', async () =>{
     // cron.schedule('53 0,6 * * *', async () => {
         try {
             // Call the function directly
