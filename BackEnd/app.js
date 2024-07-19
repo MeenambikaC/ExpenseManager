@@ -3,9 +3,9 @@ const cors = require('cors');
 const { db } = require('./db/db');
 const fs = require('fs');
 const path = require('path');
-// const cron = require('node-cron');
+const cron = require('node-cron');
 const { sendRemindersForToday } = require('./controller/reminder'); 
-import { cron } from './api/cron'
+// import { cron } from './api/cron'
 require('dotenv').config();
 const PORT = process.env.PORT;
 
@@ -13,7 +13,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use('/cron', cron);
+// app.use('/cron', cron);
 // Accessing the home page
 app.get('/', (req, res) => {
     res.send("Hello World!");
@@ -41,16 +41,16 @@ const startServer = () => {
     });
     // Cron job to send reminder emails every day at 00:15 and 06:15
     // cron.schedule('25 14,15 * * *', async () =>{
-    // cron.schedule('*/3 * * * *', async () => {
-    // // cron.schedule('53 0,6 * * *', async () => {
-    //     try {
-    //         // Call the function directly
-    //         await sendRemindersForToday({}, {}); // Pass empty request and response objects
-    //         // console.log('Reminder emails sent successfully for today');
-    //     } catch (error) {
-    //         console.error('Error sending reminder emails1:', error);
-    //     }
-    // });
+    cron.schedule('*/3 * * * *', async () => {
+    // cron.schedule('53 0,6 * * *', async () => {
+        try {
+            // Call the function directly
+            await sendRemindersForToday({}, {}); // Pass empty request and response objects
+            // console.log('Reminder emails sent successfully for today');
+        } catch (error) {
+            console.error('Error sending reminder emails1:', error);
+        }
+    });
 
 };
 
