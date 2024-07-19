@@ -1,4 +1,4 @@
-const sendRemindersForToday = require('./controller/reminder').sendRemindersForToday;
+const sendRemindersForToday = require('../controller/reminder').sendRemindersForToday;
 
 export default async function handler(req, res) {
     try {
