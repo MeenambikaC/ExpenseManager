@@ -1,5 +1,5 @@
 const ReminderSchema = require("../modules/ReminderSchema")
-// const sendReminderEmail = require('./sendEmail');
+const sendReminderEmail = require('./sendEmail');
 exports.addReminder=async (req,res)=>{
     // console.log(req.body)
     const {title,amount,category,description,date,email}= req.body
@@ -76,21 +76,21 @@ exports.modifyReminder = async (req, res) => {
 };
 
 
-// const sendReminders = async () => {
-//     try {
-//         const today = new Date().toISOString().split('T')[0];
-//         const reminders = await ReminderSchema.find({ date: today });
-//         console.log(today,"today")
-//         console.log("reminders",reminders)
-//         reminders.forEach(reminder => {
-//             sendReminderEmail(reminder.email, 'Reminder: ' + reminder.title, reminder.description);
-//         });
-//         console.log('Reminder emails sent successfully for today');
-//     } catch (error) {
-//         console.error('Error sending reminder emails:', error);
-//         throw error; // Re-throw the error to be caught by the cron job
-//     }
-// };
+const sendReminders = async () => {
+    try {
+        const today = new Date().toISOString().split('T')[0];
+        const reminders = await ReminderSchema.find({ date: today });
+        console.log(today,"today")
+        console.log("reminders",reminders)
+        reminders.forEach(reminder => {
+            sendReminderEmail(reminder.email, 'Reminder: ' + reminder.title, reminder.description);
+        });
+        console.log('Reminder emails sent successfully for today');
+    } catch (error) {
+        console.error('Error sending reminder emails:', error);
+        throw error; // Re-throw the error to be caught by the cron job
+    }
+};
 
 // const sendReminders = async () => {
 //     try {
@@ -114,12 +114,12 @@ exports.modifyReminder = async (req, res) => {
 // };
 
 // Express endpoint
-// exports.sendRemindersForToday = async (req, res) => {
-//     try {
-//         await sendReminders();
-//         // res.status(200).json({ message: 'Reminder emails sent successfully' });
-//     } catch (error) {
-//         console.log("error",error)
-//         // res.status(500).json({ error: error.message });
-//     }
-// };
+exports.sendRemindersForToday = async (req, res) => {
+    try {
+        await sendReminders();
+        // res.status(200).json({ message: 'Reminder emails sent successfully' });
+    } catch (error) {
+        console.log("error",error)
+        // res.status(500).json({ error: error.message });
+    }
+};

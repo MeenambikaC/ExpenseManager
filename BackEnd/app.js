@@ -4,8 +4,8 @@ const { db } = require('./db/db');
 const fs = require('fs');
 const path = require('path');
 const cron = require('node-cron');
-// const sendReminderEmail = require('./controller/sendEmail'); // Ensure this is correct
-// const { sendRemindersForToday } = require('./controller/reminder'); // Ensure this is correct
+const sendReminderEmail = require('./controller/sendEmail'); // Ensure this is correct
+const { sendRemindersForToday } = require('./controller/reminder'); // Ensure this is correct
 
 require('dotenv').config();
 const PORT = process.env.PORT;
@@ -40,18 +40,18 @@ const startServer = () => {
     app.listen(PORT, () => {
         console.log('Server is listening on port:', PORT);
     });
-
     // Cron job to send reminder emails every day at 00:15 and 06:15
-    // cron.schedule('00 8,15 * * *', async () =>{
-    // // cron.schedule('53 0,6 * * *', async () => {
-    //     try {
-    //         // Call the function directly
-    //         await sendRemindersForToday({}, {}); // Pass empty request and response objects
-    //         // console.log('Reminder emails sent successfully for today');
-    //     } catch (error) {
-    //         console.error('Error sending reminder emails1:', error);
-    //     }
-    // });
+    cron.schedule('41 14,15 * * *', async () =>{
+    // cron.schedule('53 0,6 * * *', async () => {
+        try {
+            // Call the function directly
+            await sendRemindersForToday({}, {}); // Pass empty request and response objects
+            // console.log('Reminder emails sent successfully for today');
+        } catch (error) {
+            console.error('Error sending reminder emails1:', error);
+        }
+    });
+
 };
 
 // Start the server
