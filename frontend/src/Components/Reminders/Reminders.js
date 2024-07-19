@@ -55,7 +55,7 @@ function Reminders() {
           <div className="incomes">
             {reminders.map((reminder)=>
               {
-                const{ _id,title,amount,date,category,description,type}=reminder;
+                const{ _id,title,amount,date,category,description,type,email}=reminder;
                 return <IncomeItems
                     key={_id}
                     id={_id}
@@ -65,6 +65,7 @@ function Reminders() {
                     date={date}
                     type={type}
                     category={category}
+                    email={email}
                     indicatorColor={"var(--color red)"}
                     deleteItem={deleteReminder}
                     updateItem={modifyReminder}

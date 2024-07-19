@@ -1,6 +1,6 @@
 const mongoose=require('mongoose')
 
-
+const sendReminderEmail = require('../controller/sendEmail')
 
 const ReminderSchema =new mongoose.Schema({
     title:{
@@ -28,6 +28,10 @@ const ReminderSchema =new mongoose.Schema({
         type:String,
         required:true,
         trim:true,
+    },
+    email: {
+        type: String,
+        required: true
     },
     description:{
         type:String,

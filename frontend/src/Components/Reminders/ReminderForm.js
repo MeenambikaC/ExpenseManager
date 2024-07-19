@@ -15,9 +15,10 @@ function ReminderForm() {
         date: '',
         category: '',
         description: '',
+        email:'',
     })
 
-    const { title, amount, date, category,description } = inputState;
+    const { title, amount, date, category,description,email } = inputState;
 
     const handleInput = name => e => {
         setInputState({...inputState, [name]: e.target.value})
@@ -34,6 +35,7 @@ function ReminderForm() {
             date: '',
             category: '',
             description: '',
+            email:''
         })
     }
 
@@ -83,8 +85,17 @@ function ReminderForm() {
                 </select>
             </div>
             <div className="input-control">
+                <input value={email}  
+                    type="text" 
+                    name={'email'} 
+                    placeholder={'Enter email'}
+                    onChange={handleInput('email')} 
+                />
+            </div>
+            <div className="input-control">
                 <textarea name="description" value={description} placeholder='Add A Reference' id="description" cols="30" rows="4" onChange={handleInput('description')}></textarea>
             </div>
+            
             <div className="submit-btn">
                 <Button 
                     name={'Add Reminders'}
@@ -95,6 +106,7 @@ function ReminderForm() {
                     color={'#f00'}
                 />
             </div>
+            
         </ReminderFormStyled>
     )
 }
