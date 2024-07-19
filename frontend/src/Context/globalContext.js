@@ -14,6 +14,7 @@ export const GlobalProvider = ({children}) => {
     const [reminders,setReminders]=useState([])
     const[login,setLogin]=useState([])
     const [error, setError] = useState(null)
+    const [mail,setMail]=useState([])
 
     //calculate incomes
     const addIncome = async (income) => {
@@ -167,6 +168,19 @@ export const GlobalProvider = ({children}) => {
         return response.data
 
     }
+    const transactionReminder = () => {
+        const history = [...reminders]
+        history.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt)
+        })
+
+        return history.slice(0, 4)
+    };
+    const sendMail = async () => {
+        const response = await axios.get(`${BASE_URL}cron`)
+        // setIncomes(response.data)
+        console.log(response.data)
+    }
 
 
     return (
@@ -195,7 +209,9 @@ export const GlobalProvider = ({children}) => {
             totalReminder,
             login,
             addLogin,
-            getLoginStatus
+            getLoginStatus,
+            transactionReminder,
+            sendMail
         }}>
             {children}
         </GlobalContext.Provider>

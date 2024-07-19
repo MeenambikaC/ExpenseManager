@@ -7,7 +7,7 @@ import { useGlobalContext } from '../../Context/globalContext';
 import History from '../History/History';
 
 function Dashboard() {
-  const {totalIncome,incomes,totalExpenses,totalBalance,getIncomes,getExpenses,expenses,getLoginStatus}=useGlobalContext()
+  const {totalIncome,incomes,totalExpenses,totalBalance,getIncomes,getExpenses,expenses,getLoginStatus,transactionReminder}=useGlobalContext()
   const [loginStatus, setLoginStatus] = useState('');
   const [initialEffectRun, setInitialEffectRun] = useState(false);
 
@@ -27,7 +27,7 @@ function Dashboard() {
       setInitialEffectRun(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getLoginStatus, getIncomes,getExpenses, initialEffectRun]);
+  }, [getLoginStatus, getIncomes,getExpenses,transactionReminder, initialEffectRun]);
 
   if (!loginStatus) {
     return <div>Loading...</div>;

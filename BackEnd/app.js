@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
     res.send("Hello World!");
 });
 
-app.get('/api/cron', async (req, res) => {
+app.get('/api/v1/cron', async (req, res) => {
     try {
         await sendRemindersForToday();
         res.status(200).send('Cron job executed successfully.');
