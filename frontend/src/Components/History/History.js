@@ -9,10 +9,11 @@ const isToday = (dateString) => {
 };
 
 function History() {
-    const { transactionHistory, transactionReminder, sendMail } = useGlobalContext();
+    const { transactionHistory, transactionReminder, sendMail,getReminders } = useGlobalContext();
     const [emailSent, setEmailSent] = useState(false);
 
     const history = transactionHistory();
+    // const get_reminder=getReminders();
     const reminder = transactionReminder();
 
     useEffect(() => {
